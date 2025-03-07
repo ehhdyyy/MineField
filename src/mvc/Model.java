@@ -2,7 +2,7 @@ package mvc;
 
 import java.io.Serializable;
 
-abstract class Model extends Publisher implements Serializable{
+public abstract class Model extends Publisher implements Serializable {
 
     protected abstract boolean getUnsavedChanges();
 
@@ -17,5 +17,5 @@ abstract class Model extends Publisher implements Serializable{
     protected abstract void subscribe(AppPanel appPanel);
 
     protected abstract void changed();
-    
+
 }

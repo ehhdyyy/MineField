@@ -1,7 +1,7 @@
 package mvc;
 
-interface AppFactory {
-    
+public interface AppFactory {
+
     public String getTitle();
 
     public String[] getHelp();
