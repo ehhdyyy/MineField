@@ -1,8 +1,37 @@
 package minefield;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+
 import mvc.*;
 
 public class Minefield extends Model {
+    public static final int percentMined = 5;
+    private final List<Player> path;
+    private boolean isMine;
+    private boolean isRevealed;
+    private int nearbyMines;
+
+    public Minefield() {
+        path = new ArrayList<>();
+        isMine = false;
+        isRevealed = false;
+        nearbyMines = nearbyMines;
+    }
+
+    public List<Player> getPath() {
+        return path;
+    }
+
+    public Player getCurrPos() {
+        return path.get(path.size() - 1);
+    }
+
+    private void placeMines() {
+        Random rand = new Random();
+
+    }
 
     @Override
     protected boolean getUnsavedChanges() {
