@@ -27,6 +27,11 @@ public class MinefieldFactory implements AppFactory {
     }
 
     @Override
+    public View makeView(Model m) {
+        return new MinefieldView((Minefield) m);
+    }
+
+    @Override
     public String[] getEditCommands() {
         return new String[] {
                 "NW",
