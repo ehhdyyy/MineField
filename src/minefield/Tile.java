@@ -11,9 +11,17 @@ public class Tile {
         this.nearbyMines = 0;
     }
 
+    public boolean getIsMine(){
+        return isMine;
+    }
+
+    public void setIsMine(){
+        isMine = true;
+    }
+
     public boolean reveal(){
         if(isMine){
-            throw Exception;
+            throw new IndexOutOfBoundsException("You stepped on a Mine!");
         }
         else{
             isRevealed = true;

@@ -3,17 +3,16 @@ package minefield;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
-
 import mvc.*;
 
 public class Minefield extends Model {
     public static final int percentMined = 5;
     private final List<Tile> path;
-    private int SIZE = 20;
+    private final Tile[][] field;
 
     public Minefield() {
         path = new ArrayList<>();
-        Tile[][] field = new Tile[SIZE][SIZE];
+        field = new Tile[20][20];
     }
 
     public List<Tile> getPath() {
@@ -24,16 +23,15 @@ public class Minefield extends Model {
         return path.get(path.size() - 1);
     }
 
-    private static void placeMines() {
+    private void placeMines() {
         Random rand = new Random();
-        int minesPlaced = 0;
+        int amtMined = 0;
 
-        while (minesPlaced < 10) {
-            int row = random.nextInt(SIZE);
-            int col = random.nextInt(SIZE);
-            if (Tile[row][col].getIsMine()) {
-                Tile.getIsMine() = true;
-                minesPlaced++;
+        while(amtMined < 10){
+            Tile tile = field[rand.nextInt()][rand.nextInt()];
+            if(!tile.getIsMine()){
+                tile.setIsMine();
+                amtMined++;
             }
         }
     }

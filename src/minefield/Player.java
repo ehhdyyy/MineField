@@ -1,24 +1,24 @@
 package minefield;
 
 public class Player {
-    private int x;
-    private int y;
+    private int row;
+    private int col;
     private int nearbyMines;
     private boolean isRevealed;
 
-    public Player(int x, int y, int nearbyMines, boolean isRevealed){
-        this.x = x;
-        this.y = y;
+    public Player(int row, int col, int nearbyMines, boolean isRevealed){
+        this.row = row;
+        this.col = col;
         this.nearbyMines = nearbyMines;
         this.isRevealed = isRevealed;
     }
 
-    public int getX(){
-        return x;
+    public int getRow(){
+        return row;
     }
 
-    public int getY(){
-        return y;
+    public int getCol(){
+        return col;
     }
 
     public int getNearbyMines(){
