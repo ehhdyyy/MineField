@@ -8,29 +8,34 @@ import mvc.*;
 
 public class Minefield extends Model {
     public static final int percentMined = 5;
-    private final List<Player> path;
-    private boolean isMine;
-    private boolean isRevealed;
-    private int nearbyMines;
+    private final List<Tile> path;
+    private int SIZE = 20;
 
     public Minefield() {
         path = new ArrayList<>();
-        isMine = false;
-        isRevealed = false;
-        nearbyMines = nearbyMines;
+        Tile[][] field = new Tile[SIZE][SIZE];
     }
 
-    public List<Player> getPath() {
+    public List<Tile> getPath() {
         return path;
     }
 
-    public Player getCurrPos() {
+    public Tile getCurrPos() {
         return path.get(path.size() - 1);
     }
 
-    private void placeMines() {
+    private static void placeMines() {
         Random rand = new Random();
+        int minesPlaced = 0;
 
+        while (minesPlaced < 10) {
+            int row = random.nextInt(SIZE);
+            int col = random.nextInt(SIZE);
+            if (Tile[row][col].getIsMine()) {
+                Tile.getIsMine() = true;
+                minesPlaced++;
+            }
+        }
     }
 
     @Override
