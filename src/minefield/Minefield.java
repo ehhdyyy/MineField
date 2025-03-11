@@ -9,10 +9,12 @@ public class Minefield extends Model {
     public static final int percentMined = 5;
     private final List<Tile> path;
     private final Tile[][] field;
+    private Tile goal;
 
     public Minefield() {
         path = new ArrayList<>();
         field = new Tile[20][20];
+        goal = field[20][20];
     }
 
     public List<Tile> getPath() {
@@ -23,12 +25,16 @@ public class Minefield extends Model {
         return path.get(path.size() - 1);
     }
 
+    public Tile getGoal(){
+        return goal;
+    }
+
     private void placeMines() {
         Random rand = new Random();
         int amtMined = 0;
 
         while(amtMined < 10){
-            Tile tile = field[rand.nextInt()][rand.nextInt()];
+            Tile tile = field[rand.nextInt(0, 19)][rand.nextInt(0, 19)];
             if(!tile.getIsMine()){
                 tile.setIsMine();
                 amtMined++;
