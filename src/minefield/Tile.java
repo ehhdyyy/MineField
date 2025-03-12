@@ -49,14 +49,7 @@ public class Tile {
         return isRevealed;
     }
 
-    public int nearby(int row, int col){
-        for (int i = row -1; i < row + 1; i++) {
-            for(int j = col -1; j < col + 1; j++){
-                if(isMine){
-                    nearbyMines++;
-                }
-            }
-        }
-        return nearbyMines;
+    public void setNearbyMines(){
+        nearbyMines += 1;
     }
 }

@@ -32,7 +32,7 @@ public class Minefield extends Model {
     }
 
     public Tile MakeGoalTile(){
-        goal = field[20][20];
+        goal = field[19][19];
         goal.setIsGoal();
         return goal;
     }
@@ -42,9 +42,17 @@ public class Minefield extends Model {
         int amtMined = 0;
 
         while(amtMined < 10){
-            Tile tile = field[rand.nextInt(0, 20)][rand.nextInt(0, 20)];
+            int col = rand.nextInt(0,19);
+            int row = rand.nextInt(0,19);
+            Tile tile = field[col][row];
             if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
                 tile.setIsMine();
+                for (int i = row -1; i < row + 1; i++) {
+                    for(int j = col -1; j < col + 1; j++){
+                        Tile nearbyTile = field[i][j];
+                        nearbyTile.setNearbyMines();
+                    }
+                }
                 amtMined++;
             }
         }
