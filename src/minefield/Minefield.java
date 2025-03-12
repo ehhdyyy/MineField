@@ -6,15 +6,15 @@ import java.util.Random;
 import mvc.*;
 
 public class Minefield extends Model {
-    public static final int percentMined = 5;
+    private static final int percentMined = 5;
     private final List<Tile> path;
     private final Tile[][] field;
-    private Tile goal;
+    public Tile start;
+    public Tile goal;
 
     public Minefield() {
         path = new ArrayList<>();
         field = new Tile[20][20];
-        goal = field[20][20];
     }
 
     public List<Tile> getPath() {
@@ -25,7 +25,15 @@ public class Minefield extends Model {
         return path.get(path.size() - 1);
     }
 
-    public Tile getGoal(){
+    public Tile makeStartTile(){
+        start = field[0][0];
+        start.setIsStart();
+        return start;
+    }
+
+    public Tile MakeGoalTile(){
+        goal = field[20][20];
+        goal.setIsGoal();
         return goal;
     }
 
@@ -34,8 +42,8 @@ public class Minefield extends Model {
         int amtMined = 0;
 
         while(amtMined < 10){
-            Tile tile = field[rand.nextInt(0, 19)][rand.nextInt(0, 19)];
-            if(!tile.getIsMine()){
+            Tile tile = field[rand.nextInt(0, 20)][rand.nextInt(0, 20)];
+            if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
                 tile.setIsMine();
                 amtMined++;
             }
