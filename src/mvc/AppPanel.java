@@ -2,7 +2,13 @@ package mvc;
 
 import java.awt.*;
 import java.awt.event.*;
+
+import javax.print.attribute.standard.JobKOctets;
 import javax.swing.*;
+import javax.swing.border.Border;
+
+import minefield.Minefield;
+import minefield.MinefieldView;
 
 // AppPanel is the MVC controller
 public class AppPanel extends JPanel implements Subscriber, ActionListener {
@@ -14,15 +20,38 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
     private JFrame frame;
     public static int FRAME_WIDTH = 500;
     public static int FRAME_HEIGHT = 300;
+    JPanel mainPanel = new JPanel(new BorderLayout());
 
     public AppPanel(AppFactory factory) {
 
         // initialize fields here
         this.factory = factory;
+        this.model = factory.makeModel();
+        this.view = factory.makeView(model);
+        model.subscribe(this);
+
+        controlPanel = new JPanel();
+        controlPanel.setBorder(BorderFactory.createLineBorder(Color.red));
+        controlPanel.setLayout(new GridLayout(4, 2));
+
+        for (String command : factory.getEditCommands()) {
+            JPanel p = new JPanel();
+            JButton button = new JButton(command);
+            button.addActionListener(this);
+            p.add(button);
+            controlPanel.add(p);
+        }
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
         cp.add(this);
+
+        mainPanel.add(controlPanel, BorderLayout.CENTER);
+
+        view.setPreferredSize(new Dimension(250, 250));
+        mainPanel.add(view, BorderLayout.EAST);
+
+        frame.add(mainPanel);
         frame.setJMenuBar(createMenuBar());
         frame.setTitle(factory.getTitle());
         frame.setSize(FRAME_WIDTH, FRAME_HEIGHT);

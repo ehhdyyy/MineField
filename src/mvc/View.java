@@ -1,9 +1,20 @@
 package mvc;
 
-public class View implements Subscriber{
+import javax.swing.*;
 
-    public void setModel(Model model) {
-        
+public class View extends JPanel implements Subscriber {
+
+    protected Model model;
+
+    public View(Model model) {
+        this.model = model;
+        this.model.subscribe(this);
+    }
+
+    public void setModel(Model newModel) {
+        this.model.unsubscribe(this);
+        this.model = newModel;
+        this.model.subscribe(this);
     }
 
     @Override
@@ -11,5 +22,5 @@ public class View implements Subscriber{
         // TODO Auto-generated method stub
         throw new UnsupportedOperationException("Unimplemented method 'update'");
     }
-    
+
 }
