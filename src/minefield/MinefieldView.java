@@ -3,10 +3,19 @@ package minefield;
 import mvc.*;
 import java.awt.*;
 
+import javax.swing.*;
+
 public class MinefieldView extends View {
 
     int cols = 20;
     int rows = 20;
+    int tileSize = 12;
+    JPanel gridPanel = new JPanel(new GridLayout(rows,cols));
+    JLabel[][] gridLabels = new JLabel[rows][cols];
+    
+    int playerRow = 0;
+    int playerCol = 0;
+
 
     public void setModel(Model newModel) {
         super.setModel(newModel);
@@ -16,29 +25,58 @@ public class MinefieldView extends View {
 
     public MinefieldView(Minefield m) {
         super(m);
+
+    }
+
+    public void movePlayer(int newRow, int newCol){
+        gridLabels[playerRow][playerCol].setBackground(Color.lightGray);
+
+        playerRow = newRow;
+        playerCol = newCol;
+
+        gridLabels[playerRow][playerCol].setBackground(Color.yellow);
     }
 
     @Override
     public void paintComponent(Graphics g) {
-        setBackground(Color.DARK_GRAY);
+
         super.paintComponent(g);
-
-        int width = (250 / cols);
-        int height = (250 / rows);
-
-        g.setColor(Color.black);
-
-        // Draw vertical lines
-        for (int i = 0; i <= cols; i++) {
-            int x = width * i;
-            g.drawLine(x, 0, x, height * rows);
+        g.setFont(new Font("Arial", Font.BOLD, 8));
+        Minefield minefield = (Minefield) model;
+        Tile[][] field = minefield.getField();
+        
+        for(int rowIndex = 0; rowIndex < rows; rowIndex++){
+            for(int colIndex = 0; colIndex < cols; colIndex++){
+                drawTile(g, field[rowIndex][colIndex], rowIndex, colIndex);    
+            }
         }
 
-        // Draw horizontal lines
-        for (int i = 0; i <= rows; i++) {
-            int y = height * i;
-            g.drawLine(0, y, width * cols, y);
+    }
+
+    public void drawTile(Graphics g, Tile tile, int row, int col){
+        int x = row * tileSize;
+        int y = col * tileSize;
+        g.setColor(Color.LIGHT_GRAY);
+        g.fillRect(x, y, tileSize, tileSize);
+        g.setColor(Color.BLACK);
+        g.drawRect(x, y, tileSize, tileSize);
+
+        if(tile.getIsGoal()){
+            g.setColor(Color.GREEN);
+            g.drawRect(x,y,tileSize,tileSize);
         }
+        if(tile.getIsMine()){
+            g.setColor(Color.RED);
+            g.fillRect(x,y,tileSize,tileSize);
+        }
+    
+        if(!tile.getReveal()){
+            g.drawString(Integer.toString(tile.getNearbyMines()), x + tileSize / 3, y + tileSize / 2 + 5);
+        }else{
+            g.drawString(Integer.toString(tile.getNearbyMines()), x + tileSize / 3, y + tileSize / 2 + 5);
+        }
+
+            
     }
 
 }

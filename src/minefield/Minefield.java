@@ -25,6 +25,10 @@ public class Minefield extends Model {
         return path;
     }
 
+    public Tile[][] getField(){
+        return field;
+    }
+
     public Tile getCurrPos() {
         return path.get(path.size() - 1);
     }
@@ -55,11 +59,11 @@ public class Minefield extends Model {
         while(amtMined < 400 * ((double)percentMined/100)){
             int col = rand.nextInt(20);
             int row = rand.nextInt(20);
-            Tile tile = field[col][row];
+            Tile tile = field[row][col];
 
             if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
                 tile.setIsMine();
-                System.out.println("Mine " + amtMined + " on tile: " + row + " " + col);
+                System.out.println("-------------- \nMine " + amtMined + " on tile: " + row + " " + col);
                 for (int i = row - 1; i <= row + 1; i++) {
                     for(int j = col - 1; j <= col + 1; j++){
                         if(i < 0 || i > 19 || j < 0 || j > 19){
@@ -72,6 +76,7 @@ public class Minefield extends Model {
                         nearbyTile = field[i][j];
                         nearbyTile.setNearbyMines();
                         System.out.println("Tile near mine: " + i + " " + j);
+                        System.out.println("Nearby Tile Mine Count: " + nearbyTile.getNearbyMines());
                     }
                 }
                 amtMined++;

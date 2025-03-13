@@ -19,7 +19,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
     protected JPanel controlPanel;
     private JFrame frame;
     public static int FRAME_WIDTH = 500;
-    public static int FRAME_HEIGHT = 300;
+    public static int FRAME_HEIGHT = 305;
     JPanel mainPanel = new JPanel(new BorderLayout());
 
     public AppPanel(AppFactory factory) {
@@ -110,7 +110,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
             } else { // must be from Edit menu
-
+                
             }
         } catch (Exception e) {
             handleException(e);

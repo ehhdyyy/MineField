@@ -49,6 +49,10 @@ public class Tile {
         return isRevealed;
     }
 
+    public boolean getReveal(){
+        return isRevealed;
+    }
+
     public void setNearbyMines(){
         nearbyMines += 1;
     }
