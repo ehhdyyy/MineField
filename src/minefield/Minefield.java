@@ -15,6 +15,9 @@ public class Minefield extends Model {
     public Minefield() {
         path = new ArrayList<>();
         field = new Tile[20][20];
+        makeStartTile();
+        makeGoalTile();
+        placeMines();
     }
 
     public List<Tile> getPath() {
@@ -25,32 +28,36 @@ public class Minefield extends Model {
         return path.get(path.size() - 1);
     }
 
-    public Tile makeStartTile(){
+    public void makeStartTile(){
         start = field[0][0];
         start.setIsStart();
-        return start;
     }
 
-    public Tile MakeGoalTile(){
+    public void makeGoalTile(){
         goal = field[19][19];
         goal.setIsGoal();
-        return goal;
     }
 
     private void placeMines() {
         Random rand = new Random();
         int amtMined = 0;
+        Tile nearbyTile;
 
-        while(amtMined < 10){
-            int col = rand.nextInt(0,19);
-            int row = rand.nextInt(0,19);
+        while(amtMined < 400 * (percentMined/100)){
+            int col = rand.nextInt(20);
+            int row = rand.nextInt(20);
             Tile tile = field[col][row];
             if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
                 tile.setIsMine();
-                for (int i = row -1; i < row + 1; i++) {
-                    for(int j = col -1; j < col + 1; j++){
-                        Tile nearbyTile = field[i][j];
-                        nearbyTile.setNearbyMines();
+                for (int i = row -1; i <= row + 1; i++) {
+                    for(int j = col -1; j <= col + 1; j++){
+                        if(field[i][j] != null){
+                            nearbyTile = field[i][j];
+                            nearbyTile.setNearbyMines();
+                        }else{
+                            continue;
+                        }
+                        
                     }
                 }
                 amtMined++;
