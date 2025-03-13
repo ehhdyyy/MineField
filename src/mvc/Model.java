@@ -4,18 +4,28 @@ import java.io.Serializable;
 
 public abstract class Model extends Publisher implements Serializable {
 
-    // protected abstract boolean getUnsavedChanges();
+    String fileName;
+    boolean unsavedChanges;
 
-    // protected abstract String getFileName();
+    protected boolean getUnsavedChanges(){
+        return unsavedChanges;
+    }
 
-    // protected abstract void setFileName(String fName);
+    protected String getFileName(){
+        return fileName;
+    }
 
-    // protected abstract void setUnsavedChanges(boolean b);
+    protected void setFileName(String fName){
+        this.fileName = fName;
+    }
 
-    // protected abstract void unsubscribe(AppPanel appPanel);
+    protected void setUnsavedChanges(boolean b){
+        this.unsavedChanges = b;
+    }
 
-    // protected abstract void subscribe(AppPanel appPanel);
-
-    protected abstract void changed();
+    protected void changed(){
+        unsavedChanges = true;
+        notifySubscribers();
+    }
 
 }
