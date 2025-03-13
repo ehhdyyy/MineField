@@ -28,7 +28,7 @@ public class Tile {
     }
 
     public void setIsStart(){
-        isStart = true;
+        this.isStart = true;
     }
 
     public boolean getIsGoal(){
@@ -51,5 +51,9 @@ public class Tile {
 
     public void setNearbyMines(){
         nearbyMines += 1;
+    }
+
+    public int getNearbyMines(){
+        return nearbyMines;
     }
 }

@@ -15,6 +15,7 @@ public class Minefield extends Model {
     public Minefield() {
         path = new ArrayList<>();
         field = new Tile[20][20];
+        initializeTiles();
         makeStartTile();
         makeGoalTile();
         placeMines();
@@ -26,6 +27,14 @@ public class Minefield extends Model {
 
     public Tile getCurrPos() {
         return path.get(path.size() - 1);
+    }
+
+    public void initializeTiles(){
+        for(int i =0; i < 20; i++){
+            for(int j = 0; j < 20; j++){
+                field[i][j] = new Tile();
+            }
+        }
     }
 
     public void makeStartTile(){
@@ -42,22 +51,27 @@ public class Minefield extends Model {
         Random rand = new Random();
         int amtMined = 0;
         Tile nearbyTile;
-
-        while(amtMined < 400 * (percentMined/100)){
+        
+        while(amtMined < 400 * ((double)percentMined/100)){
             int col = rand.nextInt(20);
             int row = rand.nextInt(20);
             Tile tile = field[col][row];
+
             if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
                 tile.setIsMine();
-                for (int i = row -1; i <= row + 1; i++) {
-                    for(int j = col -1; j <= col + 1; j++){
-                        if(field[i][j] != null){
-                            nearbyTile = field[i][j];
-                            nearbyTile.setNearbyMines();
-                        }else{
+                System.out.println("Mine " + amtMined + " on tile: " + row + " " + col);
+                for (int i = row - 1; i <= row + 1; i++) {
+                    for(int j = col - 1; j <= col + 1; j++){
+                        if(i < 0 || i > 19 || j < 0 || j > 19){
+                            continue;
+                        }
+                        if(i == row && j == col){
                             continue;
                         }
                         
+                        nearbyTile = field[i][j];
+                        nearbyTile.setNearbyMines();
+                        System.out.println("Tile near mine: " + i + " " + j);
                     }
                 }
                 amtMined++;

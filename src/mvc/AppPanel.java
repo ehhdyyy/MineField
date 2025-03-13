@@ -32,15 +32,7 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
 
         controlPanel = new JPanel();
         controlPanel.setBorder(BorderFactory.createLineBorder(Color.red));
-        controlPanel.setLayout(new GridLayout(4, 2));
-
-        for (String command : factory.getEditCommands()) {
-            JPanel p = new JPanel();
-            JButton button = new JButton(command);
-            button.addActionListener(this);
-            p.add(button);
-            controlPanel.add(p);
-        }
+        
 
         frame = new SafeFrame();
         Container cp = frame.getContentPane();
