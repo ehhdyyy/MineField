@@ -1,6 +1,8 @@
 package minefield;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+
 import javax.swing.*;
 import mvc.*;
 
@@ -16,6 +18,22 @@ public class MinefieldPanel extends AppPanel {
             button.addActionListener(this);
             p.add(button);
             controlPanel.add(p);
+        }
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent ae) {
+        super.actionPerformed(ae);
+
+        try {
+            DIRECTION direction = DIRECTION.valueOf(ae.getActionCommand());
+            Minefield minefield = (Minefield) model;
+
+            Commands command = new Commands(minefield, direction);
+            command.execute();
+
+        } catch (Exception e) {
+            handleException(e);
         }
 
     }

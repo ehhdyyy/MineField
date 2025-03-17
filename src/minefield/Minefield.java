@@ -7,46 +7,43 @@ import mvc.*;
 
 public class Minefield extends Model {
     private static final int percentMined = 5;
-    private final List<Tile> path;
     private final Tile[][] field;
     public Tile start;
     public Tile goal;
+    public Player player;
 
     public Minefield() {
-        path = new ArrayList<>();
         field = new Tile[20][20];
+        this.player = new Player(this, 0, 0);
         initializeTiles();
         makeStartTile();
         makeGoalTile();
         placeMines();
     }
 
-    public List<Tile> getPath() {
-        return path;
-    }
-
-    public Tile[][] getField(){
+    public Tile[][] getField() {
         return field;
     }
 
-    public Tile getCurrPos() {
-        return path.get(path.size() - 1);
+    public Player getPlayer() {
+        return player;
     }
 
-    public void initializeTiles(){
-        for(int i =0; i < 20; i++){
-            for(int j = 0; j < 20; j++){
+    public void initializeTiles() {
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
                 field[i][j] = new Tile();
             }
         }
     }
 
-    public void makeStartTile(){
+    public void makeStartTile() {
         start = field[0][0];
         start.setIsStart();
+        start.reveal();
     }
 
-    public void makeGoalTile(){
+    public void makeGoalTile() {
         goal = field[19][19];
         goal.setIsGoal();
     }
@@ -55,24 +52,24 @@ public class Minefield extends Model {
         Random rand = new Random();
         int amtMined = 0;
         Tile nearbyTile;
-        
-        while(amtMined < 400 * ((double)percentMined/100)){
+
+        while (amtMined < 400 * ((double) percentMined / 100)) {
             int col = rand.nextInt(20);
             int row = rand.nextInt(20);
             Tile tile = field[row][col];
 
-            if(!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()){
+            if (!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()) {
                 tile.setIsMine();
                 System.out.println("-------------- \nMine " + amtMined + " on tile: " + row + " " + col);
                 for (int i = row - 1; i <= row + 1; i++) {
-                    for(int j = col - 1; j <= col + 1; j++){
-                        if(i < 0 || i > 19 || j < 0 || j > 19){
+                    for (int j = col - 1; j <= col + 1; j++) {
+                        if (i < 0 || i > 19 || j < 0 || j > 19) {
                             continue;
                         }
-                        if(i == row && j == col){
+                        if (i == row && j == col) {
                             continue;
                         }
-                        
+
                         nearbyTile = field[i][j];
                         nearbyTile.setNearbyMines();
                         System.out.println("Tile near mine: " + i + " " + j);
@@ -83,7 +80,4 @@ public class Minefield extends Model {
             }
         }
     }
-
-    
-
 }

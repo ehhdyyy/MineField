@@ -1,6 +1,6 @@
 package minefield;
 
-public enum HEADING {
+public enum DIRECTION {
     N,
     E,
     W,
