@@ -17,46 +17,71 @@ public class Minefield extends Model {
         this.player = player;
     }
 
+    public void movePlayer(int x, int y) {
+        int newRow = player.getRow() + x;
+        int newCol = player.getCol() + y;
+
+        if (newRow < 0 || newRow > 19 || newCol < 0 || newCol > 19) {
+            throw new IllegalArgumentException("You have moved out of Bounds!");
+        }
+
+        Tile tile = field[newRow][newCol];
+
+        if (tile.getIsMine()) {
+            mvc.Utilities.inform("You stepped on a mine!");
+            return;
+        }
+
+        if (tile.getIsGoal()) {
+            mvc.Utilities.inform("You reached the goal!");
+        }
+
+        player.setRow(newRow);
+        player.setCol(newCol);
+        tile.reveal();
+    }
+
     public void move(Heading heading) {
+        
         try {
             switch (heading) {
                 case "N": {
-                    player.movePlayer(0, -1);
+                    movePlayer(0, -1);
                     break;
                 }
 
                 case "E": {
-                    player.movePlayer(1, 0);
+                    movePlayer(1, 0);
                     break;
                 }
 
                 case "W": {
-                    player.movePlayer(-1, 0);
+                    movePlayer(-1, 0);
                     break;
                 }
 
                 case "S": {
-                    player.movePlayer(0, 1);
+                    movePlayer(0, 1);
                     break;
                 }
 
                 case "NE": {
-                    player.movePlayer(1, -1);
+                    movePlayer(1, -1);
                     break;
                 }
 
                 case "NW": {
-                    player.movePlayer(-1, -1);
+                    movePlayer(-1, -1);
                     break;
                 }
 
                 case "SE": {
-                    player.movePlayer(1, 1);
+                    movePlayer(1, 1);
                     break;
                 }
 
                 case "SW": {
-                    player.movePlayer(-1, 1);
+                    movePlayer(-1, 1);
                     break;
                 }
 
