@@ -6,8 +6,8 @@ public class Tile {
     private int nearbyMines;
     private boolean isStart;
     private boolean isGoal;
-    
-    public Tile(){
+
+    public Tile() {
         this.isMine = false;
         this.isRevealed = false;
         this.nearbyMines = 0;
@@ -15,41 +15,40 @@ public class Tile {
         this.isGoal = false;
     }
 
-    public boolean getIsMine(){
+    public boolean getIsMine() {
         return isMine;
     }
 
-    public void setIsMine(){
+    public void setIsMine() {
         isMine = true;
     }
 
-    public boolean getIsStart(){
+    public boolean getIsStart() {
         return isStart;
     }
 
-    public void setIsStart(){
+    public void setIsStart() {
         isStart = true;
     }
 
-    public boolean getIsGoal(){
+    public boolean getIsGoal() {
         return isGoal;
     }
 
-    public void setIsGoal(){
+    public void setIsGoal() {
         isGoal = true;
     }
 
-    public boolean reveal(){
-        if(isMine){
+    public boolean reveal() {
+        if (isMine) {
             throw new IndexOutOfBoundsException("You stepped on a Mine!");
-        }
-        else{
+        } else {
             isRevealed = true;
         }
         return isRevealed;
     }
 
-    public void setNearbyMines(){
+    public void setNearbyMines() {
         nearbyMines += 1;
     }
 }
