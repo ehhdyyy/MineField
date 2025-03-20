@@ -47,8 +47,8 @@ public class Utilities {
         gripe.printStackTrace();
         JOptionPane.showMessageDialog(null,
                 gripe.getMessage(),
-                "OOPS!",
-                JOptionPane.ERROR_MESSAGE);
+                "Minefield",
+                JOptionPane.INFORMATION_MESSAGE);
     }
 
     // asks user to save changes
