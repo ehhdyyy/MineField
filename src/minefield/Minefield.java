@@ -10,11 +10,14 @@ public class Minefield extends Model {
     private final Tile[][] field;
     public Tile start;
     public Tile goal;
+    public Tile tile;
     public Player player;
+    public boolean gameOver;
 
     public Minefield() {
         field = new Tile[20][20];
         this.player = new Player(this, 0, 0);
+        gameOver = false;
         initializeTiles();
         makeStartTile();
         makeGoalTile();
@@ -79,5 +82,41 @@ public class Minefield extends Model {
                 amtMined++;
             }
         }
+    }
+
+    public void movePlayer(int rowAmt, int colAmt) throws Exception {
+
+        if(gameOver){
+            throw new Exception("Game over!");
+        }
+        int newRow = player.getRow() + rowAmt;
+        int newCol = player.getCol() + colAmt;
+
+        if (newRow < 0 || newRow > 19 || newCol < 0 || newCol > 19) {
+            throw new IllegalArgumentException("You have moved out of Bounds!");
+        }
+
+        Tile tile = field[newRow][newCol];
+
+        if (tile.getIsMine()) {
+            player.setRow(newRow);
+            player.setCol(newCol);
+            Utilities.inform("You stepped on a mine!");
+            gameOver = true;
+            throw new Exception("Game over! You cannot move anymore!");
+        }
+
+        if (tile.getIsGoal()) {
+            player.setRow(newRow);
+            player.setCol(newCol);
+            Utilities.inform("You reached the goal!");
+            gameOver = true;
+            throw new Exception("Congrats");
+        }
+
+        player.setRow(newRow);
+        player.setCol(newCol);
+        tile.reveal();
+
     }
 }

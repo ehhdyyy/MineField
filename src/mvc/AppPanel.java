@@ -110,6 +110,8 @@ public class AppPanel extends JPanel implements Subscriber, ActionListener {
             } else if (cmmd.equals("Help")) {
                 Utilities.inform(factory.getHelp());
             } else { // must be from Edit menu
+                Command moveCommand = factory.makeEditCommand(model, cmmd, ae.getSource());
+                moveCommand.execute();
                 
             }
         } catch (Exception e) {

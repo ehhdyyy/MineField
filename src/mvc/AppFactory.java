@@ -13,4 +13,6 @@ public interface AppFactory {
     public View makeView(Model m);
 
     public String[] getEditCommands();
+
+    public Command makeEditCommand(Model model, String type, Object source);
 }

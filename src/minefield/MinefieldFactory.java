@@ -45,4 +45,39 @@ public class MinefieldFactory implements AppFactory {
         };
     }
 
+    public Command makeEditCommand(Model model, String type, Object source) {
+        DIRECTION direction = null;
+        switch(type){
+            case "NW":
+                direction = DIRECTION.NW;
+                break;
+            case "N":
+                direction = DIRECTION.N;
+                break;
+            case "NE":
+                direction = DIRECTION.NE;
+                break;
+            case "W":
+                direction = DIRECTION.W;
+                break;
+            case "E":
+                direction = DIRECTION.E;
+                break;
+            case "SW":
+                direction = DIRECTION.NE;
+                break;
+            case "S":
+                direction = DIRECTION.S;
+                break;
+            case "SE":
+                direction = DIRECTION.SE;
+                break;
+            
+        }
+        if(direction != null){
+            return new Commands(model,direction);
+        }
+        return null;
+    }
+
 }

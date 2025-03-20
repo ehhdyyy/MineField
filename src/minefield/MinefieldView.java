@@ -13,8 +13,6 @@ public class MinefieldView extends View {
     Player player;
     int playerRow;
     int playerCol;
-    // JPanel gridPanel = new JPanel(new GridLayout(rows, cols));
-    // JLabel[][] gridLabels = new JLabel[rows][cols];
 
     public void setModel(Model newModel) {
         super.setModel(newModel);
@@ -30,17 +28,6 @@ public class MinefieldView extends View {
         this.playerCol = player.getCol();
 
     }
-
-    // public void movePlayer(int newRow, int newCol) {
-    // gridLabels[playerRow][playerCol].setBackground(Color.lightGray);
-
-    // playerRow = newRow;
-    // playerCol = newCol;
-
-    // gridLabels[playerRow][playerCol].setBackground(Color.yellow);
-
-    // repaint();
-    // }
 
     @Override
     public void paintComponent(Graphics g) {
@@ -74,14 +61,13 @@ public class MinefieldView extends View {
             g.setColor(Color.GREEN);
             g.drawRect(x, y, tileSize, tileSize);
         }
-        if (tile.getIsMine()) {
-            g.setColor(Color.RED);
-            g.fillRect(x, y, tileSize, tileSize);
-        }
+        // if (tile.getIsMine()) {  //CHECKS WHERE MINE IS 
+        //     g.setColor(Color.RED);
+        //     g.fillRect(x, y, tileSize, tileSize);
+        // }
 
         if (playerRow == row && playerCol == col) {
             g.setColor(Color.YELLOW);
-            g.drawRect(x, y, tileSize, tileSize);
         }
 
         if (tile.getReveal()) {
