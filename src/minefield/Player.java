@@ -2,7 +2,6 @@ package minefield;
 
 import java.io.Serializable;
 
-import mvc.*;
 
 public class Player implements Serializable{
     private int row;

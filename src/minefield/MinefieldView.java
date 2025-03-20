@@ -3,8 +3,6 @@ package minefield;
 import mvc.*;
 import java.awt.*;
 
-import javax.swing.*;
-
 public class MinefieldView extends View {
 
     int cols = 20;

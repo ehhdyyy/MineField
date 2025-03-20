@@ -1,7 +1,5 @@
 package minefield;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 import mvc.*;
 
@@ -63,7 +61,6 @@ public class Minefield extends Model {
 
             if (!tile.getIsMine() && !tile.getIsGoal() && !tile.getIsStart()) {
                 tile.setIsMine();
-                //System.out.println("-------------- \nMine " + amtMined + " on tile: " + row + " " + col);
                 for (int i = row - 1; i <= row + 1; i++) {
                     for (int j = col - 1; j <= col + 1; j++) {
                         if (i < 0 || i > 19 || j < 0 || j > 19) {
@@ -75,8 +72,6 @@ public class Minefield extends Model {
 
                         nearbyTile = field[i][j];
                         nearbyTile.setNearbyMines();
-                        //System.out.println("Tile near mine: " + i + " " + j);
-                        //System.out.println("Nearby Tile Mine Count: " + nearbyTile.getNearbyMines());
                     }
                 }
                 amtMined++;
