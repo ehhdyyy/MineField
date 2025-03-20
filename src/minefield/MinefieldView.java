@@ -61,10 +61,10 @@ public class MinefieldView extends View {
             g.setColor(Color.GREEN);
             g.drawRect(x, y, tileSize, tileSize);
         }
-        // if (tile.getIsMine()) {  //CHECKS WHERE MINE IS 
-        //     g.setColor(Color.RED);
-        //     g.fillRect(x, y, tileSize, tileSize);
-        // }
+        if (tile.getIsMine() && tile.getReveal()) {  //CHECKS WHERE MINE IS 
+            g.setColor(Color.RED);
+            g.fillRect(x, y, tileSize, tileSize);
+        }
 
         if (playerRow == row && playerCol == col) {
             g.setColor(Color.YELLOW);
