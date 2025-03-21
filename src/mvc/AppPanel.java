@@ -2,13 +2,7 @@ package mvc;
 
 import java.awt.*;
 import java.awt.event.*;
-
-import javax.print.attribute.standard.JobKOctets;
 import javax.swing.*;
-import javax.swing.border.Border;
-
-import minefield.Minefield;
-import minefield.MinefieldView;
 
 // AppPanel is the MVC controller
 public class AppPanel extends JPanel implements Subscriber, ActionListener {
